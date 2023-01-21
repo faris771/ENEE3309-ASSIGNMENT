@@ -11,7 +11,7 @@ gt = heaviside(t) + (1/(-T0/2)).*(t-T0/2).*heaviside(t-T0/2) + (1/(T0/2)).*(t-T0
 % grid on
 
 
-a0 = (1/T0).* int(gt,t,0,T0)
+a0 = (1/T0).* int(gt,t,0,T0);
 an = 0; bn = 0;
 
 
@@ -60,8 +60,9 @@ display(xbn)
 MSE_THREE_VALUES = sprintf('MSE:\n');
 MSE_THREE_VALUES=  MSE_THREE_ANWERS + sprintf("%f \n%f\n%f\n",MSE(1),MSE(2),MSE(3))
 
-
-fplot((a0+an + bn),'g','LineWidth',1.5)
+gat = a0+an + bn
+figure;
+fplot(gat,'g','LineWidth',1.5)
 hold on % to make 2 signals on one plot
 grid on
 axis([-0.005,0.11,-1,2])
@@ -73,6 +74,27 @@ legend({'y=ga(t)', 'x = g(t)'})
 
 %part IV
 
+ct = 10 * cos (2*pi*200*t)
+st = ct * gat % k=3
+magOfSt = 10 * gat;
+
+
+figure ;
+fplot(st,'cyan','LineWidth',1.2)
+axis([-0.005,0.11,-20,20])
+grid on
+hold on
+fplot(magOfSt,'red','LineWidth',1.5)
+fplot(-magOfSt,'red','LineWidth',1.5)
+
+xlabel('t')
+ylabel('S(t)')
+
+
+
+
+
+% SF = fft(0.5,st);
 
 
 
